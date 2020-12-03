@@ -1,6 +1,7 @@
 (defpackage :aoc-misc
   (:use :cl)
-  (:export :read-input-as-list))
+  (:export :read-input-as-list
+           :read-input-as-array))
 
 (in-package :aoc-misc)
 
@@ -14,3 +15,9 @@
   (with-open-file (stream (format nil "inputs/day~2,'0d" day))
     (read-input stream func)))
     
+
+(defun read-input-as-array (day)
+  (let
+    ((input-lst (read-input-as-list day)))
+    (make-array (list (length input-lst) (length (first input-lst)))
+                :initial-contents input-lst)))
