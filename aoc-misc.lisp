@@ -1,6 +1,7 @@
 (defpackage :aoc-misc
   (:use :cl)
-  (:export :read-input-as-list
+  (:export :read-broken-lines
+           :read-input-as-list
            :read-input-as-array
            :count-valid))
 
@@ -22,6 +23,22 @@
     ((input-lst (read-input-as-list day)))
     (make-array (list (length input-lst) (length (first input-lst)))
                 :initial-contents input-lst)))
+
+(defun concatenate-lines (lst space? &optional str)
+  (let ((line (first lst)))
+    (cond
+      ((and (null lst) (null str)) nil)
+      ((zerop (length line)) (cons str (concatenate-lines (rest lst) space?)))
+      (t
+        (concatenate-lines
+          (rest lst)
+          space?
+          (if (null str)
+            line
+            (concatenate 'string str (when space? " ") line)))))))
+
+(defun read-broken-lines (day space?)
+  (concatenate-lines (read-input-as-list day) space?))
 
 (defun count-valid (predicate lst)
   (reduce
