@@ -12,9 +12,14 @@
   (let ((line (read-line stream nil)))
     (when line (cons (funcall func line) (read-input stream func)))))
 
+(defun create-file-name (day suffix)
+  (concatenate
+    'string
+    (format nil "inputs/day~2,'0d" day)
+    (when suffix (format nil "-~a" suffix))))
 
-(defun read-input-as-list (day &optional (func #'identity))
-  (with-open-file (stream (format nil "inputs/day~2,'0d" day))
+(defun read-input-as-list (day &optional (func #'identity) suffix)
+  (with-open-file (stream (create-file-name day suffix))
     (read-input stream func)))
 
 
