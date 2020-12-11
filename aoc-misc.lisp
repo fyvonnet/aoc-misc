@@ -3,7 +3,8 @@
   (:export :read-broken-lines
            :read-input-as-list
            :read-input-as-array
-           :count-valid))
+           :count-valid
+           :snoc))
 
 (in-package :aoc-misc)
 
@@ -49,3 +50,6 @@
   (reduce
     (lambda (c e) (if (funcall predicate e) (1+ c) c))
     lst :initial-value 0))
+
+(defun snoc (lst elm)
+  (append lst (list elm)))
