@@ -23,9 +23,9 @@
     (read-input stream func)))
 
 
-(defun read-input-as-array (day)
+(defun read-input-as-array (day &optional (func #'identity) suffix)
   (let
-    ((input-lst (read-input-as-list day)))
+    ((input-lst (read-input-as-list day func suffix)))
     (make-array (list (length input-lst) (length (first input-lst)))
                 :initial-contents input-lst)))
 
