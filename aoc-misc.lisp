@@ -5,6 +5,7 @@
            :read-input-as-array
            :count-valid
            :snoc
+           :split-at
            :take-until))
 
 (in-package :aoc-misc)
@@ -62,3 +63,7 @@
       (car lst)
       (take-until test (cdr lst)))))
 
+(defun split-at (n lst &optional lst2)
+  (if (zerop n)
+    (values (reverse lst2) lst)
+    (split-at (1- n) (cdr lst) (cons (car lst) lst2))))
