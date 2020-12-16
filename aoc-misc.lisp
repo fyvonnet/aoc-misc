@@ -4,7 +4,8 @@
            :read-input-as-list
            :read-input-as-array
            :count-valid
-           :snoc))
+           :snoc
+           :take-until))
 
 (in-package :aoc-misc)
 
@@ -53,3 +54,11 @@
 
 (defun snoc (lst elm)
   (append lst (list elm)))
+
+(defun take-until (test lst)
+  (if (or (null lst) (funcall test (car lst)))
+    nil
+    (cons
+      (car lst)
+      (take-until test (cdr lst)))))
+
