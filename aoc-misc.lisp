@@ -6,7 +6,8 @@
            :count-valid
            :snoc
            :split-at
-           :take-until))
+           :take-until
+           :replicate))
 
 (in-package :aoc-misc)
 
@@ -66,3 +67,7 @@
   (if (zerop n)
     (values (reverse lst2) lst)
     (split-at (1- n) (cdr lst) (cons (car lst) lst2))))
+
+(defun replicate (n e)
+  (unless (zerop n)
+    (cons e (replicate (1- n) e))))
