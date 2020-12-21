@@ -7,7 +7,8 @@
            :snoc
            :split-at
            :take-until
-           :replicate))
+           :replicate
+           :list-to-set))
 
 (in-package :aoc-misc)
 
@@ -71,3 +72,9 @@
 (defun replicate (n e)
   (unless (zerop n)
     (cons e (replicate (1- n) e))))
+
+
+(defun list-to-set (lst)
+  (reduce
+    #'fset:with lst
+    :initial-value (fset:empty-set)))
