@@ -8,7 +8,8 @@
            :split-at
            :take-until
            :replicate
-           :list-to-set))
+           :list-to-set
+           :open-input))
 
 (in-package :aoc-misc)
 
@@ -22,6 +23,9 @@
     'string
     (format nil "inputs/day~2,'0d" day)
     (when suffix (format nil "-~a" suffix))))
+
+(defun open-input (day &optional suffix)
+  (open (create-file-name day suffix)))
 
 (defun read-input-as-list (day &optional (func #'identity) suffix)
   (with-open-file (stream (create-file-name day suffix))
